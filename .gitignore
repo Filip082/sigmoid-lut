@@ -1,0 +1,6 @@
+xsim.dir/
+*.log
+*.pb
+*.jou
+*.wdb
+data/sigmoid.hex
