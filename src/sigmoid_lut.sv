@@ -2,12 +2,12 @@ module sigmoid_lut #(
     parameter int DATA_W   = 16,
     parameter int FRACTIONAL_BITS = 12,
     localparam int INTEGER_BITS = DATA_W - FRACTIONAL_BITS,
-    parameter int LUT_BITS = 8     // 2^8 = 256 wpisów
+    parameter int LUT_BITS = 8
 )(
     input  logic                clk,
     input  logic                rst_n,
-    input  logic [INTEGER_BITS-1:-FRACTIONAL_BITS]   x_in,    // Q4.12 signed
-    output logic [INTEGER_BITS-1:-FRACTIONAL_BITS]   y_out    // Q4.12 unsigned
+    input  logic [INTEGER_BITS-1:-FRACTIONAL_BITS]   x_in,
+    output logic [INTEGER_BITS-1:-FRACTIONAL_BITS]   y_out
 );
 
     logic [DATA_W-1:0] rom [0:(1<<LUT_BITS)-1];
