@@ -3,4 +3,5 @@ xsim.dir/
 *.pb
 *.jou
 *.wdb
-data/sigmoid.hex
+data/
+venv/

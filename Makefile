@@ -6,6 +6,7 @@ SRC     = src/sigmoid_lut.sv sim/tb.sv
 TOP     = tb
 SNAP    = tb_snap
 HEX     = data/sigmoid.hex
+PYTHON  = venv/bin/python3
 
 XVLOG   = xvlog --sv
 XELAB   = xelab --debug typical
@@ -23,10 +24,16 @@ environment:
 	@echo "--- Enter Virtual Environment ---"
 	distrobox enter vivado-box
 
+venv/bin/python3: requirements.txt
+	@echo "--- Setting up venv ---"
+	python3 -m venv venv
+	venv/bin/pip install -q -r requirements.txt
+
 .PHONY: lut
-lut:
+lut: venv/bin/python3
 	@echo "--- Generating LUT hex ---"
-	python3 scripts/gen_lut.py
+	@mkdir -p data
+	$(PYTHON) scripts/gen_lut.py
 
 .PHONY: sim
 sim: lut
