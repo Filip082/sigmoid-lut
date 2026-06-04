@@ -4,10 +4,10 @@ module sigmoid_lut #(
     localparam int INTEGER_BITS = DATA_W - FRACTIONAL_BITS,
     parameter int LUT_BITS = 8
 )(
-    input  logic                clk,
-    input  logic                rst_n,
-    input  logic [INTEGER_BITS-1:-FRACTIONAL_BITS]   x_in,
-    output logic [INTEGER_BITS-1:-FRACTIONAL_BITS]   y_out
+    input  logic clk,
+    input  logic rst_n,
+    input  logic signed [INTEGER_BITS-1:-FRACTIONAL_BITS] x_in,
+    output logic signed [INTEGER_BITS-1:-FRACTIONAL_BITS] y_out
 );
 
     logic [DATA_W-1:0] rom [0:(1<<LUT_BITS)-1];

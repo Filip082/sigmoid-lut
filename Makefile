@@ -2,9 +2,9 @@
 #  Vivado CLI Makefile — sigmoid LUT
 # ==============================================================================
 
-SRC     = src/sigmoid_lut.sv sim/tb.sv
-TOP     = tb
-SNAP    = tb_snap
+SRC     = src/sigmoid_lut.sv $(wildcard sim/*.sv)
+TOP     = top
+SNAP    = top_snap
 HEX     = data/sigmoid.hex
 PYTHON  = venv/bin/python3
 
@@ -17,7 +17,8 @@ XSIM    = xsim
 # ==============================================================================
 
 .PHONY: all
-all: sim
+all: lut
+	sim
 
 .PHONY: environment
 environment:
@@ -36,7 +37,7 @@ lut: venv/bin/python3
 	$(PYTHON) scripts/gen_lut.py
 
 .PHONY: sim
-sim: lut
+sim:
 	@echo "--- Compiling ---"
 	$(XVLOG) $(SRC)
 	@echo "--- Elaborating ---"
