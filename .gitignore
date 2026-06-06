@@ -1,5 +1,5 @@
 xsim.dir/
-xsim.cobdb/
+xsim.covdb/
 *.log
 *.pb
 *.jou
