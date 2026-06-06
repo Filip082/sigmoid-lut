@@ -19,6 +19,7 @@ XSIM    = xsim
 .PHONY: all
 all: lut
 	sim
+	plots
 
 .PHONY: environment
 environment:
@@ -36,6 +37,12 @@ lut: venv
 	@mkdir -p data
 	$(PYTHON) scripts/gen_lut.py
 	$(PYTHON) scripts/gen_optimized_lut.py
+
+.PHONY: plots
+plots: venv
+	@echo "--- Generating plots ---"
+	@mkdir -p img
+	$(PYTHON) scripts/compare_models.py
 
 .PHONY: sim
 sim:
