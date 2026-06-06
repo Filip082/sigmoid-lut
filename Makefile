@@ -2,7 +2,7 @@
 #  Vivado CLI Makefile — sigmoid LUT
 # ==============================================================================
 
-SRC     = src/sigmoid_lut.sv $(wildcard sim/*.sv)
+SRC     = src/sigmoid_lut.sv src/sigmoid_lut_optimized.sv $(wildcard sim/*.sv)
 TOP     = top
 SNAP    = top_snap
 HEX     = data/sigmoid.hex
@@ -25,16 +25,17 @@ environment:
 	@echo "--- Enter Virtual Environment ---"
 	distrobox enter vivado-box
 
-venv/bin/python3: requirements.txt
+venv: requirements.txt
 	@echo "--- Setting up venv ---"
 	python3 -m venv venv
 	venv/bin/pip install -q -r requirements.txt
 
 .PHONY: lut
-lut: venv/bin/python3
+lut: venv
 	@echo "--- Generating LUT hex ---"
 	@mkdir -p data
 	$(PYTHON) scripts/gen_lut.py
+	$(PYTHON) scripts/gen_optimized_lut.py
 
 .PHONY: sim
 sim:
