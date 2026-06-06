@@ -14,14 +14,11 @@ module top;
   end
 
   fixed_point_if dut_in(clk);
-  fixed_point_if dut_out(clk);
+  fixed_point_if dut_out_uniform(clk);
+  fixed_point_if dut_out_opt(clk);
 
-  sigmoid_lut dut (
-    .clk(clk),
-    .rst_n(~rst),
-    .x_in(dut_in.val),
-    .y_out(dut_out.val)
-  );
+  sigmoid_lut           dut0 (.clk, .rst_n(~rst), .x_in(dut_in.val), .y_out(dut_out_uniform.val));
+  sigmoid_lut_optimized dut1 (.clk, .rst_n(~rst), .x_in(dut_in.val), .y_out(dut_out_opt.val));
 
-  test t1(clk, rst, dut_in, dut_out);
+  test t1 (clk, rst, dut_in, dut_out_uniform, dut_out_opt);
 endmodule : top
